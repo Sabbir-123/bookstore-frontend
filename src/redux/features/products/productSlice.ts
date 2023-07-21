@@ -11,6 +11,7 @@ const initialState: IProduct = {
   priceRange: 500,
 };
 
+
 const productSlice = createSlice({
   name: 'product',
   initialState,

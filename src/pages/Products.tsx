@@ -9,7 +9,8 @@ import {
   toggleState,
 } from '@/redux/features/products/productSlice';
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
-import { IProduct } from '@/types/globalTypes';
+import { IBooks } from '@/types/globalTypes';
+
 import { useEffect, useState } from 'react';
 
 export default function Products() {
@@ -67,7 +68,7 @@ console.log(productsData)
         </div>
       </div>
       <div className="col-span-9 grid grid-cols-3 gap-10 pb-20">
-        {productsData?.map((product: IProduct) => (
+        {productsData?.map((product: IBooks) => (
           <ProductCard product={product} />
         ))}
       </div>
