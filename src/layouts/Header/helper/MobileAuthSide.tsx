@@ -1,25 +1,35 @@
-import React from "react";
-import { Link } from "react-router-dom";
-
+import { useAppSelector } from '@/redux/hook';
+import { Link } from 'react-router-dom';
 
 const MobileAuthSide = () => {
+  const { user } = useAppSelector((state) => state.user);
+
   return (
     <ul className="flex gap-[20px] flex-col">
-      <Link to="/login">
+      {user?.email ? (
         <li className="md:text-lg text-black cursor-pointer font-[500]">
-          Log in
+         <button>Log Out</button> 
         </li>
-      </Link>
+      ) : (
+        <>
+          <Link to="/login">
+            <li className="md:text-lg text-black cursor-pointer font-[500]">
+              Log in
+            </li>
+          </Link>
 
-      <li>
-        <Link to="/signup" className="cursor-pointer">
-          <button className="border-none outline-none font-[500] text-black">
-            Sign up
-          </button>
-        </Link>
-      </li>
+          <li>
+            <Link to="/signup" className="cursor-pointer">
+              <button className="border-none outline-none font-[500] text-black">
+                Sign up
+              </button>
+            </Link>
+          </li>
+        </>
+      )}
     </ul>
   );
 };
+
 
 export default MobileAuthSide;

@@ -17,16 +17,16 @@ export default function Navbar() {
 
   const dispatch = useAppDispatch();
 
-  const handleLogout = () => {
-    console.log('Logout');
-    signOut(auth).then(() => {
-      // Sign-out successful.
-      dispatch(setUser(null));
-    });
-  };
+  // const handleLogout = () => {
+  //   console.log('Logout');
+  //   signOut(auth).then(() => {
+  //     // Sign-out successful.
+  //     dispatch(setUser(null));
+  //   });
+  // };
 
   return (
-    <nav className="w-full h-16 fixed top backdrop-blur-lg z-10">
+    <nav className="w-full h-16 fixed top backdrop-blur-lg z-[999]">
       <div className="py-4 shadow bg-white !z-[999]">
         <div className="container">
           <div className="flex justify-between items-center">

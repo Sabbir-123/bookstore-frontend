@@ -1,16 +1,13 @@
-import { Link } from 'react-router-dom'
-
+import { Link } from 'react-router-dom';
+import logo from '../../assets/images/logo.png';
 const Brand = () => {
   return (
-    <Link to='/' > 
-      <div className='max-w-[140px]' >
-        <h1>
-            Book-Store
-        </h1>
-        {/* <Image src={logo} width={1} height={.220} layout='responsive' alt='brand' />   */}
-      </div>    
+    <Link to="/">
+      <div className="max-w-[140px]">
+        <img src={logo} width={40} height={40} alt="brand" />
+      </div>
     </Link>
-  )
-}
+  );
+};
 
-export default Brand
+export default Brand;

@@ -73,6 +73,22 @@
   }
 }
 
+.color-brand-2 {
+  color:  #6366f1;
+  position: relative;
+}
+.color-brand-2::after {
+  content: "";
+  background-color:  #6366f1;
+  height: 25px;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: -6px;
+  z-index: -1;
+  opacity: 0.1;
+}
+
 @layer base {
   * {
     @apply border-border;

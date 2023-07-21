@@ -1,3 +1,5 @@
+import { ButtonHTMLAttributes, ReactNode } from "react";
+
 // nav Data types
 export interface singleMenuTypes {
     label: string;
@@ -31,3 +33,31 @@ export interface singleMenuTypes {
   export interface navDataTypes extends singleMenuTypes {
     panel?: panelTypes;
   }
+
+
+  export type ButtonProps = {
+    className?: string;
+    translate?: string;
+    sizeClass?: string;
+    fontSize?: string;
+    //
+    loading?: boolean;
+    disabled?: boolean;
+    secondary?: boolean;
+    type?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
+    to?: string;
+    targetBlank?: boolean;
+    onClick?: () => void;
+    children?: ReactNode;
+    icon?: string;
+  };
+
+
+  export interface ShapeTypes {
+    className?: string;
+    color?: string;
+    title: string;
+    description: string;
+    shape: string;
+  }
+  

@@ -1,3 +1,4 @@
+import Button from '@/components/Buttons/Button';
 import { useAppSelector } from '@/redux/hook';
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -9,7 +10,7 @@ const AuthSide = () => {
       {user?.email ? (
         <>
           <li className="md:text-lg text-primary cursor-pointer">
-            <button className="md:text-lg">Log Out</button>
+            <Button className="md:text-lg"  sizeClass="px-[12px] py-[8px]">Log Out</Button>
           </li>
         </>
       ) : (
@@ -24,7 +25,9 @@ const AuthSide = () => {
           </li>
           <li>
             <Link to="/signup" className="cursor-pointer">
-              <button className="md:text-lg">Sign up</button>
+            <Button className="md:text-lg" sizeClass="px-[12px] py-[8px]">
+            Sign up
+          </Button>
             </Link>
           </li>
         </>

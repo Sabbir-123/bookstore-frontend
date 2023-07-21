@@ -10,7 +10,7 @@ const MobileItems = () => {
     <>
       <div className="w-full text-center">
         <h2 className="lg:text-[32px] text-[17px] font-[600] text-[#3A3737]">
-          Healthcare backed by technology for Africa.
+          All Kinds of Book in One Place
         </h2>
       </div>
       <ul className="bg-white flex gap-[20px]  border-[#DAD9D9] lg:flex-row flex-col">
