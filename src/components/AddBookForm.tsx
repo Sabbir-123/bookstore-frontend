@@ -9,7 +9,7 @@ import { Input } from './ui/input';
 import { useAddBookMutation } from '@/redux/features/products/productApi';
 import { useEffect } from 'react';
 import { toast } from './ui/use-toast';
-
+import jwt_decode from 'jwt-decode';
 type UserAddBookFormProps = React.HTMLAttributes<HTMLDivElement>;
 
 interface AddBook {
@@ -31,6 +31,10 @@ export default function AddBookForm({
     handleSubmit,
     formState: { errors },
   } = useForm<AddBook>();
+
+  const user = useAppSelector((state) => state.user);
+  const decodedToken: unknown = jwt_decode(user.accessToken!);
+  const email = decodedToken.userEmail;
     const navigate = useNavigate();
   const imagekey = '8cafa7700ddb609a54ab949219ac23a5';
   // const { user , isLoading} = useAppSelector((state) => state.user);
@@ -55,7 +59,7 @@ export default function AddBookForm({
 
           try{
             const newBook = {
-             
+             email: email,
               title: data.title,
               author: data.author,
               genre: data.genre,
@@ -65,7 +69,6 @@ export default function AddBookForm({
             };
             console.log(newBook);
             addBook(newBook)
-            console.log("object")
             toast({
               description: 'Book Added',
             });
@@ -92,16 +95,7 @@ export default function AddBookForm({
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid gap-2">
           <div className="grid gap-1">
-            {/* <Input
-              id="email"
-              placeholder="name@example.com"
-              type="email"
-              autoCapitalize="none"
-              autoComplete="email"
-              autoCorrect="off"
-              {...register('email', { required: 'Email is required' })}
-            />
-            {errors.email && <p>{errors.email.message}</p>} */}
+          
             <Input
               id="title"
               placeholder="your book title"
