@@ -6,12 +6,13 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc';
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
-import { loginUser } from '@/redux/features/user/userSlice';
+import {  setUser } from '@/redux/features/user/userSlice';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { useSignInMutation } from '@/redux/features/user/userApi';
 
 type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
 
@@ -27,22 +28,28 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
     formState: { errors },
   } = useForm<LoginFormInputs>();
 
-  const { user, isLoading } = useAppSelector((state) => state.user);
-  const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state.user);
 
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
-  const onSubmit = (data: LoginFormInputs) => {
-    console.log(data);
+  const [signIn, { isSuccess, data }] = useSignInMutation();
 
-    dispatch(loginUser({ email: data.email, password: data.password }));
+  const onSubmit: SubmitHandler<LoginFormInputs> = (formData) => {
+    signIn(formData);
   };
 
   useEffect(() => {
-    if (user.email && !isLoading) {
-      navigate('/');
+    if (user.accessToken) {
+      navigate("/");
     }
-  }, [user.email, isLoading]);
+    if (isSuccess) {
+      localStorage.setItem("user", JSON.stringify(data.data));
+      dispatch(setUser(data.data));
+      navigate("/");
+    }
+  }, [isSuccess, navigate, user.accessToken, dispatch]);
+
 
   return (
     <div className={cn('grid gap-6', className)} {...props}>

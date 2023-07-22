@@ -1,10 +1,12 @@
-import { Link } from 'react-router-dom';
+
+
+import { Link, useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { signOut } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
-import { setUser } from '@/redux/features/user/userSlice';
-import { useDisclosure } from "@mantine/hooks";
+import { logOut, setUser } from '@/redux/features/user/userSlice';
+import { useDisclosure } from '@mantine/hooks';
 import Brand from '@/components/Brand/Brand';
 import { icons } from '@/shared/libs/icons';
 import MenuItems from './Partials/MenuItems';
@@ -13,17 +15,6 @@ import Sidebar from './helper/Sidebar';
 
 export default function Navbar() {
   const [opened, { open, close }] = useDisclosure(false);
- 
-
-  const dispatch = useAppDispatch();
-
-  // const handleLogout = () => {
-  //   console.log('Logout');
-  //   signOut(auth).then(() => {
-  //     // Sign-out successful.
-  //     dispatch(setUser(null));
-  //   });
-  // };
 
   return (
     <nav className="w-full h-16 fixed top backdrop-blur-lg z-[999]">
@@ -51,9 +42,9 @@ export default function Navbar() {
           </div>
         </div>
 
-      <div className="md:hidden block">
-        <Sidebar opened={opened} close={close} />
-      </div>
+        <div className="md:hidden block">
+          <Sidebar opened={opened} close={close} />
+        </div>
       </div>
     </nav>
   );

@@ -1,21 +1,29 @@
 'use client';
 
 import * as React from 'react';
-
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc';
-import { createUser } from '@/redux/features/user/userSlice';
 import { useAppDispatch } from '@/redux/hook';
+import { useSignUpMutation } from '@/redux/features/user/userApi';
+import { useNavigate } from 'react-router-dom';
+import { toast } from './ui/use-toast';
 
 type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
 
-interface SignupFormInputs {
+interface UserFormData {
   email: string;
   password: string;
+  role: string;
+  name: {
+    firstName: string;
+    lastName: string;
+  };
+  address: string;
+  money: string;
 }
 
 export function SignupForm({ className, ...props }: UserAuthFormProps) {
@@ -23,14 +31,24 @@ export function SignupForm({ className, ...props }: UserAuthFormProps) {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SignupFormInputs>();
+  } = useForm<UserFormData>();
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const [signUp, { isSuccess }] = useSignUpMutation();
 
-  const onSubmit = (data: SignupFormInputs) => {
-    console.log(data);
-    dispatch(createUser({ email: data.email, password: data.password }));
+  const onSubmit: SubmitHandler<UserFormData> = (formData) => {
+    signUp({ user: formData });
   };
+
+  React.useEffect(() => {
+    if (isSuccess) {
+      navigate('/login');
+      toast({
+        description: 'User Registered Successfully',
+      });
+    }
+  }, [isSuccess, navigate]);
 
   return (
     <div className={cn('grid gap-6', className)} {...props}>
@@ -59,13 +77,34 @@ export function SignupForm({ className, ...props }: UserAuthFormProps) {
               {...register('password', { required: 'Password is required' })}
             />
             {errors.password && <p>{errors.password.message}</p>}
+            <select className="border border-gray-300 rounded-md p-2 w-full" {...register("role")}>
+                    <option value="seller">Seller</option>
+                    <option value="buyer">Buyer</option>
+                  </select>
             <Input
-              id="password"
-              placeholder="confirm password"
-              type="password"
-              autoCapitalize="none"
-              autoCorrect="off"
+              id="firstName"
+              placeholder="First Name"
+              {...register('name.firstName', { required: 'First Name is required' })}
             />
+            {errors.name?.firstName && <p>{errors.name.firstName.message}</p>}
+            <Input
+              id="lastName"
+              placeholder="Last Name"
+              {...register('name.lastName', { required: 'Last Name is required' })}
+            />
+            {errors.name?.lastName && <p>{errors.name.lastName.message}</p>}
+            <Input
+              id="address"
+              placeholder="Address"
+              {...register('address', { required: 'Address is required' })}
+            />
+            {errors.address && <p>{errors.address.message}</p>}
+            <Input
+              id="money"
+              placeholder="Money"
+              {...register('money', { required: 'Money is required' })}
+            />
+            {errors.money && <p>{errors.money.message}</p>}
           </div>
           <Button>Create Account</Button>
         </div>

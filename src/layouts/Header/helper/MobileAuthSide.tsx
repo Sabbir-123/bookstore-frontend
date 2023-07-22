@@ -1,14 +1,26 @@
-import { useAppSelector } from '@/redux/hook';
-import { Link } from 'react-router-dom';
-
+import { useAppDispatch, useAppSelector } from '@/redux/hook';
+import { Link, useNavigate } from 'react-router-dom';
+import jwt_decode from 'jwt-decode';
+import { logOut } from '@/redux/features/user/userSlice';
 const MobileAuthSide = () => {
-  const { user } = useAppSelector((state) => state.user);
+  const user = useAppSelector((state) => state.user);
+  const decodedToken: unknown = jwt_decode(user.accessToken!);
+  const email = decodedToken.userEmail;
+
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    dispatch(logOut());
+    navigate('/login');
+  };
 
   return (
     <ul className="flex gap-[20px] flex-col">
-      {user?.email ? (
+      {email ? (
         <li className="md:text-lg text-black cursor-pointer font-[500]">
-         <button>Log Out</button> 
+          <button onClick={handleLogout}>Log Out</button>
         </li>
       ) : (
         <>
@@ -30,6 +42,5 @@ const MobileAuthSide = () => {
     </ul>
   );
 };
-
 
 export default MobileAuthSide;

@@ -1,98 +1,48 @@
-import { auth } from '@/lib/firebase';
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from 'firebase/auth';
 
-interface IUserState {
-  user: {
-    email: string | null;
-  };
-  isLoading: boolean;
-  isError: boolean;
-  error: string | null;
-}
 
-interface ICredential {
-  email: string;
-  password: string;
-}
 
-const initialState: IUserState = {
-  user: {
-    email: null,
-  },
-  isLoading: false,
-  isError: false,
-  error: null,
+
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+
+import { createSlice } from "@reduxjs/toolkit";
+
+type userDataType = {
+  accessToken: string | null;
+  email: string | null;
+  id: string | null;
 };
 
-export const createUser = createAsyncThunk(
-  'user/createUser',
-  async ({ email, password }: ICredential) => {
-    const data = await createUserWithEmailAndPassword(auth, email, password);
+const storedData = localStorage.getItem("user");
+let parsedData: userDataType | null = null;
 
-    return data.user.email;
-  }
-);
+if (storedData) {
+  parsedData = JSON.parse(storedData);
+}
 
-export const loginUser = createAsyncThunk(
-  'user/loginUser',
-  async ({ email, password }: ICredential) => {
-    const data = await signInWithEmailAndPassword(auth, email, password);
+const initialState: userDataType = parsedData || {
+  accessToken: null,
+  email: null,
+  id: null,
+};
 
-    return data.user.email;
-  }
-);
-
-const userSlice = createSlice({
-  name: 'user ',
+export const userSlice = createSlice({
+  name: "user",
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<string | null>) => {
-      state.user.email = action.payload;
+    setUser: (state, action) => {
+      // Update the state with the provided data
+      state.accessToken = action.payload.accessToken;
+      state.email = action.payload.email;
+      state.id = action.payload.id;
     },
-    setLoading: (state, action: PayloadAction<boolean>) => {
-      state.isLoading = action.payload;
+    logOut: (state) => {
+      localStorage.removeItem("user");
+      (state.accessToken = null), (state.email = null), (state.id = null);
     },
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(createUser.pending, (state) => {
-        state.isLoading = true;
-        state.isError = false;
-        state.error = null;
-      })
-      .addCase(createUser.fulfilled, (state, action) => {
-        state.user.email = action.payload;
-        state.isLoading = false;
-      })
-      .addCase(createUser.rejected, (state, action) => {
-        state.user.email = null;
-        state.isLoading = false;
-        state.isError = true;
-        state.error = action.error.message!;
-      })
-      .addCase(loginUser.pending, (state) => {
-        state.isLoading = true;
-        state.isError = false;
-        state.error = null;
-      })
-      .addCase(loginUser.fulfilled, (state, action) => {
-        state.user.email = action.payload;
-        state.isLoading = false;
-      })
-      .addCase(loginUser.rejected, (state, action) => {
-        state.user.email = null;
-        state.isLoading = false;
-        state.isError = true;
-        state.error = action.error.message!;
-      });
   },
 });
 
-export const { setUser, setLoading } = userSlice.actions;
-
+export const { setUser, logOut } = userSlice.actions;
 export default userSlice.reducer;
+

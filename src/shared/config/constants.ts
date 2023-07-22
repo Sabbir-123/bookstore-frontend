@@ -12,8 +12,8 @@ export const menuData: Array<navDataTypes> = [
       label: "About us",
     },
     {
-      to: "/explore",
-      label: "Explore",
+      to: "/addBook",
+      label: "Add Book",
     },
   ];
 
