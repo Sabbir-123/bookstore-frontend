@@ -26,11 +26,11 @@ export default function ProductCard({ product }: IProps) {
     });
   };
   return (
-    <div>
+    <div >
       <div className="rounded-2xl h-full flex flex-col items-start justify-between p-5 overflow-hidden shadow-md border border-gray-100 hover:shadow-2xl hover:scale-[102%] transition-all gap-2">
-        <Link to={`/product-details/${product._id}`} className="w-full">
-          <img src={product?.coverImage} alt="product" />
-          <h1 className="text-xl font-semibold">{product?.title}</h1>
+        <Link to={`/product-details/${product._id}`} className="w-full ">
+          <img className='h-72 w-full' src={product?.coverImage} alt="product" />
+          <h1 className="text-xl h- font-semibold">{product?.title}</h1>
         </Link>
         <p>Genre: {product?.genre}</p>
         <p>Price: {product?.price}</p>
@@ -38,7 +38,7 @@ export default function ProductCard({ product }: IProps) {
         <p className="text-sm">
           Author: {product?.author }
         </p>
-        <p className="text-sm">Price: {product?.price}</p>
+
         <div className='flex gap-2'>
         <Button className="tooltip"  variant="default" onClick={() => handleAddProduct(product)}>
         <span className="tooltiptext">Add to Wishlist</span>
