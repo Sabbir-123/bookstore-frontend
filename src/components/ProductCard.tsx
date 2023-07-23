@@ -28,7 +28,7 @@ export default function ProductCard({ product }: IProps) {
   return (
     <div >
       <div className="rounded-2xl h-full flex flex-col items-start justify-between p-5 overflow-hidden shadow-md border border-gray-100 hover:shadow-2xl hover:scale-[102%] transition-all gap-2">
-        <Link to={`/product-details/${product._id}`} className="w-full ">
+        <Link to={`/book-details/${product._id}`} className="w-full ">
           <img className='h-72 w-full' src={product?.coverImage} alt="product" />
           <h1 className="text-xl h- font-semibold">{product?.title}</h1>
         </Link>

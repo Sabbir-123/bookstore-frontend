@@ -1,7 +1,7 @@
 export interface IBooks {
   _id: string;
   title: string;
-  author: string[];
+  author: string;
   genre: string;
   publicationYear: number;
   email?: string;

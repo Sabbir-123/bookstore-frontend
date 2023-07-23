@@ -3,6 +3,7 @@ import Footer from '@/layouts/Footer';
 import Illustration from '../../assets/images/hero-illustration.svg'
 import GetStarted from './Partials/GetStarted';
 import Why from './Partials/Why';
+import RecentlyAdded from './Partials/RecentlyAdded';
 export default function Home() {
   return (
     <>
@@ -37,6 +38,7 @@ export default function Home() {
     </div>
   </section>
   <Why/>
+  <RecentlyAdded/>
       <GetStarted/>
       <Footer />
     </>

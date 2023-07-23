@@ -1,18 +1,20 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import ProductReview from '@/components/ProductReview';
+import Loading from '@/components/ui/Loading';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/components/ui/use-toast';
+import Footer from '@/layouts/Footer';
 import { addToCart } from '@/redux/features/cart/cartSlice';
 import { useSingleProductQuery } from '@/redux/features/products/productApi';
 import { useAppDispatch } from '@/redux/hook';
 import { IBooks } from '@/types/globalTypes';
-
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 export default function ProductDetails() {
   const { id } = useParams();
   const dispatch = useAppDispatch();
-  const { data: product, isLoading, error } = useSingleProductQuery(id);
+  const { data: product, isLoading } = useSingleProductQuery(id);
 
   console.log(product)
   const handleAddProduct = (product: IBooks) => {
@@ -28,6 +30,10 @@ export default function ProductDetails() {
       description: 'Product Added',
     });
   };
+
+  if(isLoading){
+    return <Loading/>
+  }
   return (
     <>
       <div className="flex max-w-7xl mx-auto items-center border-b border-gray-300">
@@ -40,9 +46,7 @@ export default function ProductDetails() {
           <p className="text-xl">Rating: {product?.data?.rating}</p>
           <p className="text-xl">Price: {product?.data?.price}</p>
           <ul className="space-y-1 text-lg">
-            {product?.data?.author?.map((auths: string,) => (
-              <li key={auths}>{auths}</li>
-            ))}
+           Author: {product?.data?.author}
           </ul>
           <div className='flex gap-2'>
         <Button className="tooltip"  variant="default" onClick={() => handleAddProduct(product)}>
@@ -59,10 +63,29 @@ export default function ProductDetails() {
 </svg>
 
         </Button>
+        <Link to={`/edit/${id}`}>
+        <Button className="tooltip bg-green-700" variant="default">
+        <span className="tooltiptext">Edit</span>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+</svg>
+
+
+        </Button>
+        </Link>
+        <Button className="tooltip bg-red-700" variant="default" onClick={() => handleAddReading(product)}>
+        <span className="tooltiptext">Delete</span>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+</svg>
+
+
+        </Button>
         </div>
         </div>
       </div>
       <ProductReview id={id!} />
+      <Footer/>
     </>
   );
 }

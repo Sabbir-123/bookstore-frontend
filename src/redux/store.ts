@@ -8,6 +8,7 @@ const store = configureStore({
   reducer: {
     cart: cartReducer,
     product: productReducer,
+
     user: userReducer,
     [api.reducerPath]: api.reducer,
   },

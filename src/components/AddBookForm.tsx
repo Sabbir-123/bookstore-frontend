@@ -22,6 +22,8 @@ interface AddBook {
   coverImage: string;
 }
 
+
+
 export default function AddBookForm({
   className,
   ...props
@@ -34,7 +36,7 @@ export default function AddBookForm({
 
   const user = useAppSelector((state) => state.user);
   const decodedToken: unknown = jwt_decode(user.accessToken!);
-  const email = decodedToken.userEmail;
+  const email = decodedToken.userEmail ;
     const navigate = useNavigate();
   const imagekey = '8cafa7700ddb609a54ab949219ac23a5';
   // const { user , isLoading} = useAppSelector((state) => state.user);
@@ -76,7 +78,7 @@ export default function AddBookForm({
           catch(err){
             console.log(err)
           }
-                // navigate('/allbooks');
+          navigate('/');
         }
       });
   };
