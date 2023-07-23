@@ -26,15 +26,15 @@ const routes = createBrowserRouter([
       },
       {
         path: '/addBook',
-        element: <AddBook />,
+        element: <PrivateRoute><AddBook /></PrivateRoute>,
       },
       {
         path: '/book-details/:id',
-        element: <ProductDetails />,
+        element:<PrivateRoute><ProductDetails /></PrivateRoute> ,
       },
       {
         path: '/edit/:id',
-        element: <EditBook />,
+        element:<PrivateRoute><EditBook /></PrivateRoute> ,
       },
       {
         path: '/checkout',

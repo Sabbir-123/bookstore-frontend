@@ -14,7 +14,10 @@ import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { IBooks } from '@/types/globalTypes';
 
 export default function Products() {
-  const { data, isLoading, error } = useGetProductsQuery(undefined);
+  const { data, isLoading, error } = useGetProductsQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+    pollingInterval: 30000,
+  });
 
   const { toast } = useToast();
 

@@ -36,6 +36,7 @@ export default function AddBookForm({
 
   const user = useAppSelector((state) => state.user);
   const decodedToken: unknown = jwt_decode(user.accessToken!);
+  console.log(decodedToken)
   const email = decodedToken.userEmail ;
     const navigate = useNavigate();
   const imagekey = '8cafa7700ddb609a54ab949219ac23a5';
