@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useState } from "react";
 
 
 import { panelSectionType, panelTypes, sectionItemTypes } from "@/shared/config/types";
@@ -7,7 +8,7 @@ import { icons } from "@/shared/libs/icons";
 
 const MobilePanel = (props: panelTypes) => {
   // destructure
-  const { sections, title } = props;
+  const { sections } = props;
   //   states
   const [menuOpen, setMenuOpen] = useState<boolean>(true);
   const [menuOpenId, setMenuOpenId] = useState<number>(1);

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 
 import {
   useGetReviewQuery,
@@ -15,7 +15,7 @@ interface IProps {
 }
 const ReviewForm = ({ id }: IProps) => {
   const [inputValue, setInputValue] = useState<string>('');
-  const [comment, setComment] = useState('');
+ 
   const [postReview] = usePostReviewMutation();
   const { data } = useGetReviewQuery(id, {
     refetchOnMountOrArgChange: true,

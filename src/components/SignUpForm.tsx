@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc';
-import { useAppDispatch } from '@/redux/hook';
+
 import { useSignUpMutation } from '@/redux/features/user/userApi';
 import { useNavigate } from 'react-router-dom';
 import { toast } from './ui/use-toast';
@@ -33,7 +33,6 @@ export function SignupForm({ className, ...props }: UserAuthFormProps) {
     formState: { errors },
   } = useForm<UserFormData>();
 
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [signUp, { isSuccess }] = useSignUpMutation();
 
@@ -77,20 +76,27 @@ export function SignupForm({ className, ...props }: UserAuthFormProps) {
               {...register('password', { required: 'Password is required' })}
             />
             {errors.password && <p>{errors.password.message}</p>}
-            <select className="border border-gray-300 rounded-md p-2 w-full" {...register("role")}>
-                    <option value="seller">Seller</option>
-                    <option value="buyer">Buyer</option>
-                  </select>
+            <select
+              className="border border-gray-300 rounded-md p-2 w-full"
+              {...register('role')}
+            >
+              <option value="seller">Seller</option>
+              <option value="buyer">Buyer</option>
+            </select>
             <Input
               id="firstName"
               placeholder="First Name"
-              {...register('name.firstName', { required: 'First Name is required' })}
+              {...register('name.firstName', {
+                required: 'First Name is required',
+              })}
             />
             {errors.name?.firstName && <p>{errors.name.firstName.message}</p>}
             <Input
               id="lastName"
               placeholder="Last Name"
-              {...register('name.lastName', { required: 'Last Name is required' })}
+              {...register('name.lastName', {
+                required: 'Last Name is required',
+              })}
             />
             {errors.name?.lastName && <p>{errors.name.lastName.message}</p>}
             <Input

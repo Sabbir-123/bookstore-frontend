@@ -4,12 +4,12 @@ import Login from '@/pages/Login';
 import NotFound from '@/pages/NotFound';
 import Home from '@/pages/Home/Home';
 import Products from '@/pages/Products';
-import Checkout from '@/pages/Checkout';
-import Signup from '@/pages/Signup';
+
 import ProductDetails from '@/pages/ProductDetails';
 import PrivateRoute from './PrivateRoute';
 import AddBook from '@/pages/AddBook/AddBook';
 import EditBook from '@/pages/EditBook/EditBook';
+import Signup from '@/pages/Signup';
 
 const routes = createBrowserRouter([
   {
@@ -35,15 +35,7 @@ const routes = createBrowserRouter([
       {
         path: '/edit/:id',
         element:<PrivateRoute><EditBook /></PrivateRoute> ,
-      },
-      {
-        path: '/checkout',
-        element: (
-          <PrivateRoute>
-            <Checkout />,
-          </PrivateRoute>
-        ),
-      },
+      }
     ],
   },
   {

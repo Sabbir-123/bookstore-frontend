@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment*/
 /* eslint-disable @typescript-eslint/restrict-template-expressions*/
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Button from '@/components/Buttons/Button';
 import { logOut } from '@/redux/features/user/userSlice';
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
-import React from 'react';
+
 import { Link, useNavigate } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 const AuthSide = () => {
   const user = useAppSelector((state) => state.user);
-  const decodedToken: unknown = jwt_decode(user.accessToken!);
+  const decodedToken: any = jwt_decode(user.accessToken as string);
   const email = decodedToken.userEmail;
 
   const navigate = useNavigate();

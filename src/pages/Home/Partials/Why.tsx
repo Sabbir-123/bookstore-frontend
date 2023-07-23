@@ -1,7 +1,7 @@
 
 import { Care_data } from "@/shared/config/constants";
 import { ShapeTypes } from "@/shared/config/types";
-import React from "react";
+
 import Shape from "../Helpers/Shape";
 
 

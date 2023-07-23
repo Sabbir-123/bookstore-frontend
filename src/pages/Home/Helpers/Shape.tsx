@@ -1,7 +1,7 @@
 import { cx } from "@/shared/config/constants";
 import { ShapeTypes } from "@/shared/config/types";
 import { icons } from "@/shared/libs/icons";
-import React from "react";
+
 
 
 const Shape = ({...shapes}) => {

@@ -1,25 +1,24 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import ProductCard from '@/components/ProductCard';
 import Loading from '@/components/ui/Loading';
-import { Label } from '@/components/ui/label';
+
 import { Slider } from '@/components/ui/slider';
-import { Switch } from '@/components/ui/switch';
-import { useToast } from '@/components/ui/use-toast';
+
 import { useGetProductsQuery } from '@/redux/features/products/productApi';
 import {
   setPriceRange,
-  toggleState,
+ 
 } from '@/redux/features/products/productSlice';
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { IBooks } from '@/types/globalTypes';
 
 export default function Products() {
-  const { data, isLoading, error } = useGetProductsQuery(undefined, {
+  const { data, isLoading } = useGetProductsQuery(undefined, {
     refetchOnMountOrArgChange: true,
     pollingInterval: 30000,
   });
 
-  const { toast } = useToast();
+ 
 
   const { priceRange, status } = useAppSelector((state) => state.product);
   const dispatch = useAppDispatch();

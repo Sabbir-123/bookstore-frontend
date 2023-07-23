@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import  { useState } from "react";
 
 
 
 import { navDataTypes } from "@/shared/config/types";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Panel from "./Panels";
 import { icons } from "@/shared/libs/icons";
 

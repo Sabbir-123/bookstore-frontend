@@ -2,12 +2,12 @@ import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBD6hqLt5V6ysmdHw0eS3A-RoxXsn4zUFU",
-  authDomain: "tech-net-aed12.firebaseapp.com",
-  projectId: "tech-net-aed12",
-  storageBucket: "tech-net-aed12.appspot.com",
-  messagingSenderId: "404717095556",
-  appId: "1:404717095556:web:90db56953005c659b0d0d1"
+  apiKey: "AIzaSyBG4FS2sB8Au9sBSFxfSjvBWUISBv0_L4Y",
+  authDomain: "bookstore-91ec5.firebaseapp.com",
+  projectId: "bookstore-91ec5",
+  storageBucket: "bookstore-91ec5.appspot.com",
+  messagingSenderId: "355668638127",
+  appId: "1:355668638127:web:e09a66f09aee4497bc175a"
 };
 
 

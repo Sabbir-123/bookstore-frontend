@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Drawer } from "@mantine/core";
 import MobileItems from "./MobileItems";
 import MobileAuthSide from "./MobileAuthSide";

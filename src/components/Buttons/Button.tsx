@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { cx } from "@/shared/config/constants";
 import { icons } from "@/shared/libs/icons";
-import React, { FC } from "react";
+import { FC } from "react";
 
 
 
