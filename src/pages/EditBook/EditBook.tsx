@@ -20,9 +20,17 @@ export default function EditBook() {
 
   //   console.log(data);
   const [updateBook, { isSuccess, error }] = useUpdateBookMutation();
-  const onSubmit: SubmitHandler<FormValues> = (formData) => {
-    console.log(formData);
-    updateBook({ id, body: formData });
+  const onSubmit: SubmitHandler<FormValues> = (data) => {
+    
+    const newBook = {
+
+         title: data.title,
+         author: data.author,
+         genre: data.genre,
+         publicationYear: Number(data.publicationYear),
+        
+       };
+    updateBook({ id, body: newBook });
   };
 
   useEffect(() => {
@@ -71,6 +79,7 @@ export default function EditBook() {
           type="text"
           placeholder="Publication Year"
           defaultValue={data?.data?.publicationYear}
+          
           {...register("publicationYear", { valueAsNumber: true })}
         />
 
