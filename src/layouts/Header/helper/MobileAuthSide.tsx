@@ -3,11 +3,9 @@ import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { Link, useNavigate } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 import { logOut } from '@/redux/features/user/userSlice';
-const MobileAuthSide = () => {
-  const user = useAppSelector((state) => state.user);
-  const decodedToken: any = jwt_decode(user.accessToken as string);
-  const email = decodedToken.userEmail;
 
+const MobileAuthSide = () => {
+  const user = useAppSelector((state) => state?.user);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -17,6 +15,17 @@ const MobileAuthSide = () => {
     navigate('/login');
   };
 
+  let email = '';
+  try {
+    if (user?.accessToken) {
+      const decodedToken: any = jwt_decode(user.accessToken);
+      email = decodedToken.userEmail;
+    }
+  } catch (error) {
+    console.error('Error decoding token:', error);
+    // Handle the error as needed (e.g., show an error message to the user)
+  }
+
   return (
     <ul className="flex gap-[20px] flex-col">
       {email ? (
@@ -25,12 +34,9 @@ const MobileAuthSide = () => {
         </li>
       ) : (
         <>
-          <Link to="/login">
-            <li className="md:text-lg text-black cursor-pointer font-[500]">
-              Log in
-            </li>
-          </Link>
-
+          <li className="md:text-lg text-black cursor-pointer font-[500]">
+            <Link to="/login">Log in</Link>
+          </li>
           <li>
             <Link to="/signup" className="cursor-pointer">
               <button className="border-none outline-none font-[500] text-black">

@@ -11,11 +11,11 @@ interface IProps {
 
 
 export default function PrivateRoute({ children }: IProps) {
-  const user = useAppSelector((state) => state.user);
+  const user = useAppSelector((state) => state?.user);
   const [isLoading, setIsLoading] = useState(true);
-  const decodedToken: any = jwt_decode(user.accessToken as string);
+  const decodedToken: any = jwt_decode(user?.accessToken as string);
   console.log(decodedToken);
-  const email = decodedToken.userEmail;
+  const email = decodedToken?.userEmail;
 
   const { pathname } = useLocation();
 

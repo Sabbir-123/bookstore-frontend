@@ -8,22 +8,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 type userDataType = {
-  accessToken: string | null;
-  email: string | null;
-  id: string | null;
+  accessToken: string | null | undefined;
+  email: string | null | undefined ;
+  id: string | null | undefined;
 };
 
-const storedData = localStorage.getItem("user");
-let parsedData: userDataType | null = null;
+const storedData = localStorage.getItem("user") || null  ;
+let parsedData: userDataType | null | undefined= null ;
 
 if (storedData) {
   parsedData = JSON.parse(storedData);
 }
 
+
 const initialState: userDataType = parsedData || {
-  accessToken: null,
-  email: null,
-  id: null,
+  accessToken: null ,
+  email: null ,
+  id: null ,
 };
 
 export const userSlice = createSlice({
@@ -32,9 +33,9 @@ export const userSlice = createSlice({
   reducers: {
     setUser: (state, action) => {
       // Update the state with the provided data
-      state.accessToken = action.payload.accessToken;
-      state.email = action.payload.email;
-      state.id = action.payload.id;
+      state.accessToken = action?.payload?.accessToken;
+      state.email = action?.payload?.email;
+      state.id = action?.payload?.id;
     },
     logOut: (state) => {
       localStorage.removeItem("user");

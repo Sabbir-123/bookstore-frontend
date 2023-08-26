@@ -41,15 +41,14 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
   };
 
   useEffect(() => {
-    if (user.accessToken) {
-      navigate("/");
-    }
+  
     if (isSuccess) {
-      localStorage.setItem("user", JSON.stringify(data.data));
-      dispatch(setUser(data.data));
+      localStorage.setItem("user", JSON.stringify(data?.data));
+      dispatch(setUser(data?.data));
+      console.log(data)
       navigate("/");
     }
-  }, [isSuccess, navigate, user.accessToken, dispatch]);
+  }, [isSuccess, navigate, user?.accessToken, dispatch]);
 
 
   return (

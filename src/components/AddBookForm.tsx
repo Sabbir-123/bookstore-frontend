@@ -35,10 +35,10 @@ export default function AddBookForm({
     formState: { errors },
   } = useForm<AddBook>();
 
-  const user = useAppSelector((state) => state.user);
-  const decodedToken: any = jwt_decode(user.accessToken as string);
+  const user = useAppSelector((state) => state?.user);
+  const decodedToken: any = jwt_decode(user?.accessToken as string);
   console.log(decodedToken)
-  const email = decodedToken.userEmail ;
+  const email = decodedToken?.userEmail ;
     const navigate = useNavigate();
   const imagekey = '8cafa7700ddb609a54ab949219ac23a5';
   // const { user , isLoading} = useAppSelector((state) => state.user);
